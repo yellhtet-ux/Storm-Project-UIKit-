@@ -7,9 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController{
     
     var Images = ["img1","img2","img3","img4","img5","img6","img7","img8","img9","img10"]
+    
     @IBOutlet var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -18,6 +19,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self;
         self.navigationItem.title = "Cloud Images";
     }
+}
+
+extension ViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Images.count
@@ -30,7 +34,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.textLabel?.text = Images[indexPath.row];
         return cell;
     }
+}
 
+extension ViewController : UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let imageVC = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             imageVC.selectedImage = Images[indexPath.row]
@@ -38,6 +45,5 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
        
     }
-    
 }
 
